@@ -1,6 +1,8 @@
 /*
 美团
-每天自动领外卖神券，以及做一些小游戏任务
+https://raw.githubusercontent.com/leafTheFish/DeathNote/main/meituan.js
+
+每天自动领外卖神券，以及做一些赚金币提现任务，抽奖活动
 
 打开微信-美团团购小程序或美团/美团外卖APP捉包
 青龙把*.meituan.com包里的userId(可选，用于区别多账号捉包),token填到meituanCookie里，多账号换行或者@隔开。格式：
@@ -9,6 +11,8 @@ userId可以删掉不填
 
 默认虚拟定位广州，需要改的自己把经纬度填到meituanPosition里，注意长度：
 export meituanPosition='113233330,23166670'
+
+要跑小程序抽奖的，把想抽奖的关键词填到变量meituanDrawKeyword里，多个关键词用&连起来。填.*可以抽所有
 
 重写：(打开微信-美团团购小程序)
 [task_local]
