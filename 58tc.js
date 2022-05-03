@@ -4,7 +4,7 @@
 安卓貌似需要root才能捉到包，IOS随便捉
 多账号切换账号不能退出登录
 
-手动捉包把PPU=UID=xxxx&UN=yyyy&...填到wbtcCookie里，多账号@隔开
+手动捉包把PPU=UID=xxxx&UN=yyyy&...填到wbtcCookie里，多账号换行隔开
 注意前面有个PPU=，捉包只有UID=xxx的话手动加上
 
 自定义UA：填到wbtcUA里，不填默认IOS15的UA
