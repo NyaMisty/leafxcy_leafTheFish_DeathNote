@@ -1,6 +1,5 @@
 /*
 美团
-https://raw.githubusercontent.com/leafTheFish/DeathNote/main/meituan.js
 
 每天自动领外卖神券，以及做一些赚金币提现任务，抽奖活动
 
