@@ -1,5 +1,6 @@
 /*
 热项社圈
+注册链接：https://raw.githubusercontent.com/leafTheFish/DeathNote/main/rxsq.png
 
 自己捉包把s78.yyyyy.run里面的token值填到变量rxsqCookie里，多账号换行或者@隔开
 每天一次或两次，12点后跑一次收取收益(未测试)
