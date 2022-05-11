@@ -14,9 +14,9 @@ export elmCookie="SID=yyyyyyyyyyyyy&USERID=123456&latitude=22.xxxxx&longitude=11
 饿了么app 或 支付宝饿了么小程序 或 微信饿了么小程序 -> 我的 -> 赚吃货豆
 [task_local]
 #饿了么
-2 0,10 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/meituan.js, tag=饿了么, enabled=true
+2 0,10 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/elm.js, tag=饿了么, enabled=true
 [rewrite_local]
-https://h5.ele.me/restapi/biz.growth_finetune/v1/finetune/operate? url script-request-header https://raw.githubusercontent.com/leafTheFish/DeathNote/main/meituan.js
+https://h5.ele.me/restapi/biz.growth_finetune/v1/finetune/operate? url script-request-header https://raw.githubusercontent.com/leafTheFish/DeathNote/main/elm.js
 [MITM]
 hostname = h5.ele.me
 */
