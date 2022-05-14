@@ -1,7 +1,7 @@
 /*
-科技玩家-签到
+#科技玩家-签到
 
-cron "34 9,21 * * *" tag:科技玩家-签到
+cron 34 9,21 * * *
 
 export kjwjCookie='username=你的账号; password=你的密码;'
 */
