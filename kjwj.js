@@ -1,6 +1,8 @@
 /*
 科技玩家-签到
 
+cron "34 9,21 * * *" tag:科技玩家-签到
+
 export kjwjCookie='username=你的账号; password=你的密码;'
 */
 const jsname = '科技玩家签到'
