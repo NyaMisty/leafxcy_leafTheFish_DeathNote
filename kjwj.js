@@ -1,7 +1,7 @@
 /*
+[task_local]
 #科技玩家-签到
-
-cron 34 9,21 * * *
+34 9,21 * * * kjwj.js, tag=科技玩家-签到, enabled=true
 
 export kjwjCookie='username=你的账号; password=你的密码;'
 */
