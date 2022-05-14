@@ -1,5 +1,6 @@
 /*
 小米运动刷步数
+cron: 40 18 * * *
 
 export xmydAccount='你的账号&你的密码'
 */

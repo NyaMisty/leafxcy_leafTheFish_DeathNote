@@ -1,10 +1,11 @@
 /*
 什么值得买-签到
+cron: 22 7,20 * * *
 
 把捉到的cookie填到smzdmCookie里，@隔开
 */
+const $ = Env('什么值得买')
 const jsname = '什么值得买'
-const $ = Env(jsname)
 const notifyFlag = 1; //0为关闭通知，1为打开通知,默认为1
 const logDebug = 0
 

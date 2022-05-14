@@ -20,14 +20,14 @@
 V2P/圈叉：
 [task_local]
 #58同城
-7 * * * * https://raw.githubusercontent.com/leafxcy/JavaScript/main/58tc.js, tag=58同城, enabled=true
+7 7-12 * * * https://raw.githubusercontent.com/leafxcy/JavaScript/main/58tc.js, tag=58同城, enabled=true
 [rewrite_local]
 https://magicisland.58.com/web/sign/getIndexSignInInfo url script-request-header https://raw.githubusercontent.com/leafxcy/JavaScript/main/58tc.js
 [MITM]
 hostname = magicisland.58.com
 */
+const $ = Env('58同城')
 const jsname = '58同城'
-const $ = Env(jsname)
 const logDebug = 0
 
 const notifyFlag = 1; //0为关闭通知，1为打开通知,默认为1

@@ -1,10 +1,11 @@
 /*
 渤海宣传员
+cron: 16 7,19 * * *
 
 把捉到token填到bhxcytoken里，换行或者@隔开，捉包后不要再打开小程序否则会掉CK
 */
+const $ = new Env('渤海宣传员');
 const jsname = '渤海宣传员'
-const $ = new Env(jsname);
 
 let envSplitor = ['\n','@']
 let httpResult, httpReq, httpResp
