@@ -1,6 +1,6 @@
 /*
 健走有礼
-扫码注册：https://raw.githubusercontent.com/leafTheFish/DeathNote/main/jzyl.png
+扫码注册：https://raw.githubusercontent.com/leafTheFish/DeathNote/main/jzyl_invite.png
 
 存步数换现金提现的微信小程序，10W金币=1元
 一天一两次即可，理论上跑一次就能完成任务
