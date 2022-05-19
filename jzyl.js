@@ -233,7 +233,6 @@ class UserInfo {
     async triggerTask(task,randomId='') {
         try {
             let url = `https://bwa.feierlaiedu.com/api/v1/bbg/taskRecord/triggerTask`
-            let randomIdStr = randomId ? `,"randomId":"${randomId}"` : ''
             let param = {"taskType":parseInt(task.taskType)}
             if(randomId) param.randomId = randomId
             let body = JSON.stringify(param)
@@ -274,6 +273,91 @@ class UserInfo {
         } finally {}
     }
     
+    async getInviteRecord(pageNo=1) {
+        try {
+            let url = `https://bwa.feierlaiedu.com/api/v1/bbg/redPacketRecord/record`
+            let body = `{"pageNo":${pageNo},"pageSize":100}`
+            let urlObject = populateUrlObject(url,this.token,body)
+            urlObject = genSign(urlObject)
+            await httpRequest('post',urlObject)
+            let result = httpResult;
+            if(!result) return
+            //console.log(result)
+            if(result.code==0) {
+                for(let item of result.data.dataList.sort(function(a,b) {return b.amount-a.amount})) {
+                    if(item.status == 0) {
+                        item.amount = item.amount/100
+                        await this.withdraw(item)
+                    }
+                }
+                if(result.data.length >= 100) {
+                    await this.getInviteRecord(pageNo+1)
+                }
+            } else {
+                console.log(`获取邀请提现列表失败: ${result.message}`)
+            }
+        } catch(e) {
+            console.log(e)
+        } finally {}
+    }
+    
+    async getExchangeList() {
+        try {
+            let url = `https://bwa.feierlaiedu.com/api/v1/bbg/index/exchangeList`
+            let body = ``
+            let urlObject = populateUrlObject(url,this.token,body)
+            urlObject = genSign(urlObject)
+            await httpRequest('post',urlObject)
+            let result = httpResult;
+            if(!result) return
+            //console.log(result)
+            if(result.code==0) {
+                for(let item of result.data) {
+                    if(item.status == false && this.step >= item.step) {
+                        await this.withdraw(item)
+                    }
+                }
+            } else {
+                console.log(`获取提现列表失败: ${result.message}`)
+            }
+        } catch(e) {
+            console.log(e)
+        } finally {}
+    }
+    
+    async withdraw(item) {
+        try {
+            let url = `https://bwa.feierlaiedu.com/api/v1/bbg/common/withdraw`
+            let param = {
+                "type": item.type,
+                "amount": item.amount,
+                "amountId": item.amountId,
+                "watchVideoToken": "",
+                "randomId": "",
+            }
+            if(item.type == 3) {
+                param = {
+                    "type": item.type,
+                    "recordId": item.id,
+                }
+            }
+            let body = JSON.stringify(param)
+            let urlObject = populateUrlObject(url,this.token,body)
+            urlObject = genSign(urlObject)
+            await httpRequest('post',urlObject)
+            let result = httpResult;
+            if(!result) return
+            //console.log(result)
+            if(result.code==0) {
+                $.logAndNotify(`账号[${this.name}]提现[${item.amount}元]成功`)
+            } else {
+                console.log(`提现[${item.amount}元]失败: ${result.message}`)
+            }
+        } catch(e) {
+            console.log(e)
+        } finally {}
+    }
+    
     async userTask() {
         console.log(`\n--------------- 账号[${this.index}] ---------------`)
         await this.getUserName();
@@ -285,6 +369,12 @@ class UserInfo {
         for(let task of extraStepTask) {
             await this.receiveStepReward(task)
         }
+    }
+    
+    async userWithdrawTask() {
+        await this.queryUserInfo(true);
+        await this.getInviteRecord();
+        await this.getExchangeList();
     }
 }
 
@@ -314,7 +404,7 @@ class UserInfo {
         
         console.log(`\n=============== 账户步数 ===============`)
         for(let user of validUserList) {
-            await user.queryUserInfo(true);
+            await user.userWithdrawTask();
         }
         
         await $.showmsg();
