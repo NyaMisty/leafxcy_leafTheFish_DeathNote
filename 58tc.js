@@ -26,7 +26,7 @@ https://magicisland.58.com/web/sign/getIndexSignInInfo url script-request-header
 [MITM]
 hostname = magicisland.58.com
 */
-const $ = Env('58同城')
+const $ = new Env("58同城")
 const jsname = '58同城'
 const logDebug = 0
 

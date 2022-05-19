@@ -4,8 +4,9 @@ cron: 40 18 * * *
 
 export xmydAccount='你的账号&你的密码'
 */
-const jsname = '小米运动刷步数'
-const $ = new Env(jsname);
+const $ = new Env("小米运动刷步数");
+const jsname = "小米运动刷步数"
+
 const logDebug = 0
 
 const notifyFlag = 1; //0为关闭通知，1为打开通知,默认为1
