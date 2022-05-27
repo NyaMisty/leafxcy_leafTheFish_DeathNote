@@ -20,9 +20,9 @@
 V2P/圈叉：
 [task_local]
 #58同城
-7 7-12 * * * https://raw.githubusercontent.com/leafxcy/JavaScript/main/58tc.js, tag=58同城, enabled=true
+7 7-12 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/58tc.js, tag=58同城, enabled=true
 [rewrite_local]
-https://magicisland.58.com/web/sign/getIndexSignInInfo url script-request-header https://raw.githubusercontent.com/leafxcy/JavaScript/main/58tc.js
+https://magicisland.58.com/web/sign/getIndexSignInInfo url script-request-header https://raw.githubusercontent.com/leafTheFish/DeathNote/main/58tc.js
 [MITM]
 hostname = magicisland.58.com
 */

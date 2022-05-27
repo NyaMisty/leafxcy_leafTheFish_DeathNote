@@ -8,9 +8,9 @@
 重写：
 [task_local]
 #咔咔
-35 9 * * * https://raw.githubusercontent.com/leafxcy/JavaScript/main/kaka.js, tag=咔咔, enabled=true
+35 9 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main//kaka.js, tag=咔咔, enabled=true
 [rewrite_local]
-https://api.imkaka.com/v1/user/index/ url script-request-header https://raw.githubusercontent.com/leafxcy/JavaScript/main/kaka.js
+https://api.imkaka.com/v1/user/index/ url script-request-header https://raw.githubusercontent.com/leafTheFish/DeathNote/main//kaka.js
 [MITM]
 hostname = api.imkaka.com
 
