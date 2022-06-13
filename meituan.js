@@ -14,7 +14,7 @@ meituanNotify：可选，推送开关，填0为不推送，填1或其他推送�
 meituanDrawKeyword：可选，抽奖的关键词，留空的话就不抽奖。默认为空
 meituanPosition： 可选，虚拟定位坐标，注意长度，格式: 113233330,23166670 (如113.233330,23.166670需要转换为113233330,23166670，即保留6位小数点)
 
-重写：(打开微信-美团团购小程序)
+重写：(打开美团APP)
 [task_local]
 #美团
 26 0,7-21/2 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/meituan.js, tag=美团, enabled=true
