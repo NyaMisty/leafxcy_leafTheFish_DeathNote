@@ -10,7 +10,7 @@
 基本把所有功能都加上了，会尝试做所有任务，有的任务是完成不了的，报错不用管
 
 变量：
-ddgyToken: 必填，账号token，多账号换行或者@隔开，格式uid&token。uid可不填，主要是方便区分账号用
+ddgyToken: 必填，账号token，多账号换行或者@隔开，格式uid&token。uid可随便填，主要是方便区分账号用
 ddgyNotify：可选，推送开关，默认为打开。设置为0就关闭，只在CK失效或者果树成熟时候通知；设置为1就开启，每次运行后通知
 
 青龙：捉任意game.xiaojukeji.com的包，把body里的uid和token用&连起来填到变量ddgyToken
