@@ -1,0 +1,113 @@
+name: Sync Upstream
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+  repository_dispatch:
+  schedule:
+   - cron: "0 */4 * * *" # min hour day week year
+
+
+env:
+  CHROME_EXT_ID: pejdijmoenmkgeppbflobdenhhabjlaj
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      ##########################################################
+      ###
+      ### XXX: Pre-init steps here
+      ###
+      ##########################################################
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Generate timestamp
+        id: timestamp # output: value
+        run: |
+          TIMESTAMP="$(date +"%Y%m%d%H%M%S")"
+          echo "Timestamp: ${TIMESTAMP}"
+          echo "::set-output name=value::${TIMESTAMP}"
+      
+      - name: Setup committer
+        run: |
+          git config --global user.email "gh-worker@misty.moe"
+          git config --global user.name "NyaMisty BuildWorker"
+
+      ### XXX: Keep alive cron-type workflows
+      - uses: gautamkrishnar/keepalive-workflow@master
+
+      ##########################################################
+      ###
+      ### XXX: Env-setup steps here
+      ###
+      ##########################################################
+      ### Python
+      ##
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+          architecture: x64
+
+      ##########################################################
+      ###
+      ### XXX: Pre-build steps here (checking, debugging)
+      ###
+      ##########################################################
+        
+      # Enable tmate debugging of manually-triggered workflows if the input option was provided
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+      
+
+      ##########################################################
+      ###
+      ### XXX: Main building steps here
+      ###
+      ##########################################################
+
+      - name: Download leafxcy repo
+        run: |
+          git clone https://github.com/leafTheFish/DeathNote /tmp/leafxcy_scripts
+      - name: Mirror original leafxcy repo
+        run: |
+          ORIGIN=$(git remote get-url origin)
+          ORIGIN_HDR=$(git config http."https://github.com/".extraheader)
+          
+          cd /tmp/leafxcy_scripts
+          git remote add mirror_origin "$ORIGIN"
+          git config http."https://github.com/".extraheader "$ORIGIN_HDR"
+          git push -f mirror_origin main:original
+      - name: Prepare to Patch scripts
+        run: |
+          mkdir -p /tmp/patched_leafxcy_scripts
+          cp -r . /tmp/patched_leafxcy_scripts
+          cd /tmp/patched_leafxcy_scripts
+          git fetch origin patched
+          git checkout patched
+          cp -r /tmp/leafxcy_scripts/* .
+      - name: Do Elm Patches
+        run: |
+          python3 patch_eleme.py /tmp/patched_leafxcy_scripts/elm.js
+      
+      - name: Commit patches & changes
+        run: |
+          cd /tmp/patched_leafxcy_scripts
+          if [ ! -z "$(git status --porcelain)" ]; then
+            echo "Repo changed! Commiting..."
+            git add .
+            git commit -m "Leafxcy scripts autoupdate-${{ steps.timestamp.outputs.value }}"
+            git push origin patched
+          fi
