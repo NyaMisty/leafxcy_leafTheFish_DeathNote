@@ -33,6 +33,7 @@ let userCount = 0
 
 let defaultUA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.23(0x18001729) NetType/WIFI Language/zh_CN'
 
+let MAX_WITHDRAW_FAIL = 3
 let withdrawList = [50000,10000,5000,3000]
 ///////////////////////////////////////////////////////////////////
 class UserInfo {
@@ -42,6 +43,8 @@ class UserInfo {
         this.valid = false
         this.timestamp = 0
         this.canRead = false
+        this.canWithdraw = true
+        this.withdrawFailCount = 0
         
         try {
             this.param = $.str2json(str)
@@ -65,6 +68,7 @@ class UserInfo {
             //console.log(result)
             if(result.code==0) {
                 this.valid = true
+                this.uid = result.result.uid
                 console.log(`账号[${this.name}]今天已读${result.result.read}/${result.result.max}，剩余可读: ${result.result.leftCount}，剩余花币: ${result.result.moneyCurrent}`)
                 if(result.result.leftCount > 0) {
                     if(result?.result?.hopeNo?.status==70) {
@@ -257,10 +261,13 @@ class UserInfo {
                     }
                 }
                 for(let val of withdrawList) {
-                    if(val > this.money) continue;
-                    let waittime = Math.floor(Math.random()*2000) + 1000;
-                    await $.wait(waittime);
-                    await this.withdraw(val);
+                    while(this.money >= val && this.canWithdraw) {
+                        let waittime = Math.floor(Math.random()*5000) + 8000;
+                        await $.wait(waittime);
+                        await this.withdraw(val);
+                    }
+                    if(!this.canWithdraw) break;
+                    if(this.withdrawFailCount >= MAX_WITHDRAW_FAIL) break;
                 }
             } else {
                 console.log(`账号[${this.name}]查询账户失败: ${result.msg}`)
@@ -288,7 +295,59 @@ class UserInfo {
                 this.money -= val
                 $.logAndNotify(`账号[${this.name}]成功提现${val/10000}元`)
             } else {
+                if(result.msg.indexOf('请明天再来') > -1) {
+                    this.canWithdraw = false
+                } else {
+                    this.withdrawFailCount++
+                }
                 $.logAndNotify(`账号[${this.name}]提现${val/10000}元失败: ${result.msg}`)
+            }
+        } catch(e) {
+            console.log(e)
+        } finally {
+            return Promise.resolve(1);
+        }
+    }
+    
+    async psmoney() {
+        try {
+            let url = `http://u.cocozx.cn/api/user/psmoney`
+            let body = JSON.stringify({"mid":this.uid,"un":null,"token":null,"pageSize":20})
+            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let urlObject = populateUrlObject(url,referer,body)
+            await httpRequest('post',urlObject)
+            let result = httpResult;
+            if(!result) return
+            //console.log(result)
+            if(result.code==0) {
+                console.log(`账号[${this.name}]可以收取下级收益${result.result.pmoney/10000}元`)
+                if(result.result.pmoney > 0) {
+                    await this.psmoneyc()
+                }
+            } else {
+                console.log(`账号[${this.name}]查询下级收益失败: ${result.msg}`)
+            }
+        } catch(e) {
+            console.log(e)
+        } finally {
+            return Promise.resolve(1);
+        }
+    }
+    
+    async psmoneyc() {
+        try {
+            let url = `http://u.cocozx.cn/api/user/psmoneyc`
+            let body = JSON.stringify({"mid":this.uid,"un":null,"token":null,"pageSize":20})
+            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let urlObject = populateUrlObject(url,referer,body)
+            await httpRequest('post',urlObject)
+            let result = httpResult;
+            if(!result) return
+            //console.log(result)
+            if(result.code==0) {
+                console.log(`账号[${this.name}]收取下级收益${result.result.val/10000}元成功`)
+            } else {
+                console.log(`账号[${this.name}]收取下级收益失败: ${result.msg}`)
             }
         } catch(e) {
             console.log(e)
@@ -309,9 +368,11 @@ class UserInfo {
         
         if(validList.length > 0) {
             console.log('\n-------------- 查询 --------------')
+            taskall = []
             for(let user of validList) {
-                await user.getUserInfo()
+                taskall.push(user.getUserInfo())
             }
+            await Promise.all(taskall)
             validList = validList.filter(x => x.valid)
             
             if(validList.length > 0) {
@@ -322,10 +383,19 @@ class UserInfo {
                 }
                 await Promise.all(taskall)
                 
-                console.log('\n-------------- 花币 --------------')
+                console.log('\n-------------- 下级收益 --------------')
+                taskall = []
                 for(let user of validList) {
-                    await user.getInfo(); 
+                    taskall.push(user.psmoney())
                 }
+                await Promise.all(taskall)
+                
+                console.log('\n-------------- 花币 --------------')
+                taskall = []
+                for(let user of validList) {
+                    taskall.push(user.getInfo())
+                }
+                await Promise.all(taskall)
             }
         }
         
