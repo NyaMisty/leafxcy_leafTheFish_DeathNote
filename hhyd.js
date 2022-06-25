@@ -2,7 +2,7 @@
 花花阅读
 
 扫码阅读：https://raw.githubusercontent.com/leafTheFish/DeathNote/main/hhyd.png
-阅读链接：http://officeac.cn/user/huahua.html?mid=TS5VC4TR5&1656147378469
+阅读链接：http://renqizhi.cn/user/huahua.html?mid=533RGK5XY&1656171931077
 
 自动阅读，满3毛自动提现
 每天最好手动读两篇，否则容易被检测，当天会没有阅读时间
