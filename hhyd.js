@@ -253,8 +253,8 @@ class UserInfo {
                 this.money = result.result.moneyCurrent
                 this.tmpkey = result.result.tmpkey
                 $.logAndNotify(`账号[${this.name}]今天已读${result.result.read}/${result.result.max}，剩余花币: ${result.result.moneyCurrent}`)
-                if(result.result.readred > 0) {
-                    for(let i=0; i<result.result.readred; i++) {
+                if(result.result.readRed > 0) {
+                    for(let i=0; i<result.result.readRed; i++) {
                         let waittime = Math.floor(Math.random()*1000) + 1000;
                         await $.wait(waittime);
                         await this.readRed();
