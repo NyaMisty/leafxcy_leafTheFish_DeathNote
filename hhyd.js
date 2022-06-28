@@ -57,10 +57,10 @@ class UserInfo {
     
     async getUserInfo() {
         try {
-            let url = `http://u.jnboss.cn/api/user/info`
+            let url = `http://u.wyexin.cn/api/user/info`
             let body = JSON.stringify({"un":this.param.un,"token":this.param.token,"pageSize":20})
             this.timestamp = Date.now()
-            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let referer =`http://u.wyexin.cn/user/huahua.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -99,7 +99,7 @@ class UserInfo {
             let url = `https://u.cocozx.cn/api/user/expire`
             let body = JSON.stringify({"un":this.param.un,"token":this.param.token,"mid":""})
             this.timestamp = Date.now()
-            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let referer =`http://u.wyexin.cn/user/huahua.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -112,9 +112,9 @@ class UserInfo {
     
     async statAccess() {
         try {
-            let url = `http://u.jnboss.cn/api/user/statAccess`
+            let url = `http://u.wyexin.cn/api/user/statAccess`
             let body = JSON.stringify({"un":this.param.un,"token":this.param.token,"pageSize":20})
-            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let referer =`http://u.wyexin.cn/user/huahua.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -134,9 +134,9 @@ class UserInfo {
     
     async getMsg() {
         try {
-            let url = `http://u.jnboss.cn/api/user/getMsg`
+            let url = `http://u.wyexin.cn/api/user/getMsg`
             let body = JSON.stringify({"un":this.param.un,"token":this.param.token,"pageSize":20})
-            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let referer =`http://u.wyexin.cn/user/huahua.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -162,9 +162,9 @@ class UserInfo {
     
     async readd() {
         try {
-            let url = `http://u.jnboss.cn/api/user/readd`
-            let body = JSON.stringify({"code":"xpz11","un":this.param.un,"token":this.param.token,"pageSize":20})
-            let referer =`http://u.jnboss.cn/user/h.html?${this.timestamp}`
+            let url = `http://u.wyexin.cn/api/user/readd`
+            let body = JSON.stringify({"code":"xpz111","un":this.param.un,"token":this.param.token,"pageSize":20})
+            let referer =`http://u.wyexin.cn/user/h.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -187,9 +187,9 @@ class UserInfo {
     
     async submitt() {
         try {
-            let url = `http://u.jnboss.cn/api/user/submitt`
-            let body = JSON.stringify({"code":"xpz22","un":this.param.un,"token":this.param.token,"pageSize":20})
-            let referer =`http://u.jnboss.cn/user/h.html?${this.timestamp}`
+            let url = `http://u.wyexin.cn/api/user/submitt`
+            let body = JSON.stringify({"code":"xpz222","un":this.param.un,"token":this.param.token,"pageSize":20})
+            let referer =`http://u.wyexin.cn/user/h.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -217,9 +217,9 @@ class UserInfo {
     
     async readRed() {
         try {
-            let url = `http://u.jnboss.cn/api/user/readRed`
+            let url = `http://u.wyexin.cn/api/user/readRed`
             let body = JSON.stringify({"un":this.param.un,"token":this.param.token,"pageSize":20})
-            let referer =`http://u.jnboss.cn/user/h.html?${this.timestamp}`
+            let referer =`http://u.wyexin.cn/user/h.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -313,7 +313,7 @@ class UserInfo {
         try {
             let url = `http://u.cocozx.cn/api/user/psmoney`
             let body = JSON.stringify({"mid":this.uid,"un":null,"token":null,"pageSize":20})
-            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let referer =`http://u.wyexin.cn/user/huahua.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -338,7 +338,7 @@ class UserInfo {
         try {
             let url = `http://u.cocozx.cn/api/user/psmoneyc`
             let body = JSON.stringify({"mid":this.uid,"un":null,"token":null,"pageSize":20})
-            let referer =`http://u.jnboss.cn/user/huahua.html?${this.timestamp}`
+            let referer =`http://u.wyexin.cn/user/huahua.html?${this.timestamp}`
             let urlObject = populateUrlObject(url,referer,body)
             await httpRequest('post',urlObject)
             let result = httpResult;
@@ -473,7 +473,7 @@ function populateUrlObject(url,referer,body=''){
             'Connection': 'keep-alive',
             'Referer': referer,
             'X-Requested-With': 'XMLHttpRequest',
-            'Origin': 'http://u.jnboss.cn',
+            'Origin': 'http://u.wyexin.cn',
             'User-Agent': defaultUA,
         },
         timeout: 5000,
