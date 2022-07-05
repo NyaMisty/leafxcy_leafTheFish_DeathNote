@@ -1,11 +1,11 @@
 /*
 读特
 
-自己捉包把token值填到dtCookie里，不提供重写了
+自己捉包把Authorization值(去掉Bearer)填到dtCookie里，不提供重写了
 定时一天一两次
 
 变量：
-dtCookie -- 必填，账号token，只填值就行。多账号换行隔开
+dtCookie -- 必填，账号Authorization，只填去掉Bearer的值就行。多账号换行隔开
 
 cron: 26 8,17 * * *
 const $ = new Env('读特');
