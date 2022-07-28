@@ -93,7 +93,7 @@ async function showmsg() {
 async function checkEnv() {
     let userCookie = ($.isNode() ? process.env.zqkdCookie : $.getdata('zqkdCookie')) || '';
     let splitor = userCookie.includes('@') ? '@' : '\n'
-    let userCookies = userCookie.split('\n')
+    let userCookies = userCookie.split(splitor)
     for(let cks of userCookies) if(cks) userCookieArr.push(cks)
     if(userCookieArr.length == 0) {
         console.log('未找到有效的userCookie')
