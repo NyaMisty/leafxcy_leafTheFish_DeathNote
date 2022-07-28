@@ -5,7 +5,7 @@
 积分换实物，积分涨的比较慢，自己决定跑不跑吧
 
 捉域名bm2-api.bluemembers.com.cn任意包的token填到bjxdCookie里，多账户换行隔开
-安卓CK需要在对应的CK后面加上#Andorid
+安卓CK需要在对应的CK后面加上#android
 不加默认为IOS CK，不通用
 
 重写：打开APP获取
