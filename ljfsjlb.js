@@ -137,7 +137,7 @@ class UserInfo {
                             await this.AddLogVideo(id)
                         }
                     }
-                    await this.GiftPoints();
+                    //await this.GiftPoints();
                 } else {
                     console.log(`查询任务失败：${result?.error?.message}`)
                 }
