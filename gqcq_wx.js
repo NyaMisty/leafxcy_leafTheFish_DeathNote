@@ -65,7 +65,11 @@ class UserInfo {
                 } else {
                     urlObject.body = paramIn.body
                 }
-                urlObject.headers['Content-Length'] = urlObject.body ? Buffer.byteLength(urlObject.body, 'utf8') : 0
+                if($.isNode()) {
+                    urlObject.headers['Content-Length'] = urlObject.body ? Buffer.byteLength(urlObject.body, 'utf8') : 0
+                } else {
+                    urlObject.headers['Content-Length'] = urlObject.body ? urlObject.body.length : 0
+                }
             }
             if(paramIn.urlObjectParam) Object.assign(urlObject,paramIn.urlObjectParam);
             if(paramIn.headerParam) Object.assign(urlObject.headers,paramIn.headerParam);
