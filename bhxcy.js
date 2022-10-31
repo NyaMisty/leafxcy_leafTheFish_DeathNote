@@ -8,7 +8,7 @@ export bhxcytoken="uid=1234567&token=qweqwertyuio"
 重写: 打开渤海宣传员-微信小程序
 [task_local]
 #渤海宣传员
-57 0,9 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/bhxcy.js, tag=渤海宣传员, enabled=true
+44 7,18 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/bhxcy.js, tag=渤海宣传员, enabled=true
 [rewrite_local]
 https://gms.ihaoqu.com/gmswx/app.php url script-request-body https://raw.githubusercontent.com/leafTheFish/DeathNote/main/bhxcy.js
 [MITM]
