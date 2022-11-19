@@ -9,7 +9,7 @@ https://mcs-mimp-web.sf-express.com/mcs-mimp/share/app/shareRedirect
 
 [task_local]
 #顺丰速运
-57 0,9 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/sfsy.js, tag=顺丰速运, enabled=true
+51 8,21 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/sfsy.js, tag=顺丰速运, enabled=true
 [rewrite_local]
 https://mcs-mimp-web.sf-express.com/mcs-mimp/share url script-request-header https://raw.githubusercontent.com/leafTheFish/DeathNote/main/sfsy.js
 [MITM]
