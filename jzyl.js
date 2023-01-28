@@ -88,10 +88,9 @@ class UserInfo {
                 this.name = result.data.wechatName
                 this.phone = result.data.phone
                 this.valid = true
-                console.log(`登录成功`)
-                console.log(`昵称：${this.name}`)
+                console.log(`账号[${this.index}]登录成功，昵称：${this.name}`)
             } else {
-                console.log(`登录失败: ${result.message}`)
+                $.logAndNotify(`账号[${this.index}]登录失败: ${result.message}`)
             }
         } catch(e) {
             console.log(e)
