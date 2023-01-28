@@ -67,7 +67,7 @@ jobs:
       # Enable tmate debugging of manually-triggered workflows if the input option was provided
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled }}
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.debug_enabled == 'true' }}
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
       
@@ -100,7 +100,7 @@ jobs:
           cp -r /tmp/leafxcy_scripts/* .
       - name: Do Elm Patches
         run: |
-          python3 patch_eleme.py /tmp/patched_leafxcy_scripts/elm.js
+          python3 patch_eleme.py /tmp/patched_leafxcy_scripts/elmV3.js
       
       - name: Commit patches & changes
         run: |
