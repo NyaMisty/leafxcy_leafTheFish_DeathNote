@@ -22,6 +22,10 @@ require = (a) => {
     if (a == 'got') return _got_new;
     return _require(a)
 }
+
+function getMin(a, b) {
+    return a < b ? a : b
+}
 '''
 
 fn = sys.argv[1]
@@ -30,6 +34,8 @@ with open(fn) as f:
 
 #newcontent = re.sub(r"(\['\\x69\\x64'\])=.*?\+'\\x38',(.*?)=0x3e8", r"\1='178002',\2=950", content)
 #assert '178002' in newcontent or newcontent != content
+content = content.replace(r"_0x5cae1d[_0x32515a(0x1d7)+'\x6e'](_0x3c2f43", r"getMin(_0x3c2f43")
+
 
 IDEN_RE = r'_0x[0-9a-f]+?'
 #STR_RE = r'[_x0-9a-f()+]+?'
