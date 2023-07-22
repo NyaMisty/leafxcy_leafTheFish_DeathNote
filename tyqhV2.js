@@ -1,6 +1,9 @@
 /*
 统一茄皇二期
 
+目前只做了部分功能
+由于我还没有种到过成熟, 所以未做成熟后的步骤
+
 微信小程序: 统一快乐星球 -> 活动 -> 茄皇的家第二期
 捉这个登录包的请求体: https://qiehuang-apig.xiaoyisz.com/qiehuangsecond/ga/public/api/login
 把请求体填到变量 tyqhCookie 里面, 多账号换行隔开
