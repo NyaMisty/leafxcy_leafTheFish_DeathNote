@@ -1,5 +1,6 @@
 /*
 广汽埃安 v1.01
+扫码下载注册: https://raw.githubusercontent.com/leafTheFish/DeathNote/main/gqaa.jpg
 
 每天签到和开连签盲盒, 车主有额外的点赞积分任务
 积分可以换充电卡等, 毛不大, 自己决定要不要玩
