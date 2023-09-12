@@ -3,6 +3,7 @@
 
 美团V3仅支持青龙等nodejs环境, 不支持圈X
 自动领券和完成一些活动任务
+建议按推荐定时跑, 每天10点15点17点有券可以抽
 
 3.10已屏蔽集合任务, 默认运行每日赚钱和抽月符
 不想运行每日赚钱的, 设置变量 meituanMrzqTask 为 false: export meituanMrzqTask="false"
