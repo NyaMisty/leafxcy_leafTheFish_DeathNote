@@ -4,7 +4,7 @@
 
 需要绑定手机号
 每天签到1积分，分享一次5积分(每月有上限)
-20分换2京东E卡，100分换10元话费，200分换20元话费
+可兑换视频会员卡和话费, 话费限制充值到绑定的手机号
 
 定时一天一次或者两次，最好不要用脚本里的默认定时
 比上一个版本脚本增加了多账号互相分享，内置助力作者
@@ -15,9 +15,9 @@
 V2P/圈X：
 [task_local]
 #卡夫享
-50 8,20 * * * https://raw.githubusercontent.com/leafxcy/JavaScript/main/kfx.js, tag=卡夫享, enabled=true
+50 8,20 * * * https://raw.githubusercontent.com/leafTheFish/DeathNote/main/kfx.js, tag=卡夫享, enabled=true
 [rewrite_local]
-https://fscrm.kraftheinz.net.cn/crm/public/index.php/api/v1/getUserInfo url script-request-header https://raw.githubusercontent.com/leafxcy/JavaScript/main/kfx.js
+https://fscrm.kraftheinz.net.cn/crm/public/index.php/api/v1/getUserInfo url script-request-header https://raw.githubusercontent.com/leafTheFish/DeathNote/main/kfx.js
 [MITM]
 hostname = fscrm.kraftheinz.net.cn
 */
